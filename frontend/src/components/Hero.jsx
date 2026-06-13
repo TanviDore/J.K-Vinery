@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function Hero() {
+  const { t, language } = useLanguage();
+
   const scrollToForm = (e) => {
     e.preventDefault();
     const targetElement = document.querySelector('#visit-form');
@@ -40,15 +43,26 @@ export default function Hero() {
           className="flex flex-col items-center"
         >
           <span className="mb-4 rounded-full border border-purple-300/30 bg-purple-900/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-purple-200 backdrop-blur-md">
-            Established Nashik Vineyard
+            {t('heroEst')}
           </span>
           
-          <h1 className="font-serif text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-            Welcome to <span className="text-glow block bg-gradient-to-r from-purple-300 via-purple-100 to-green-200 bg-clip-text text-transparent">J.K. Farm</span>
+          <h1 className="font-serif text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl leading-tight">
+            {language === 'en' ? (
+              <>
+                {t('heroWelcome')}{' '}
+                <span className="text-glow block bg-gradient-to-r from-purple-300 via-purple-100 to-green-200 bg-clip-text text-transparent">
+                  J.K. Farm
+                </span>
+              </>
+            ) : (
+              <span className="text-glow bg-gradient-to-r from-purple-300 via-purple-100 to-green-200 bg-clip-text text-transparent">
+                {t('heroWelcome')}
+              </span>
+            )}
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-stone-200 sm:text-xl md:text-2xl">
-            Premium Crimson & J.K Sugar Grapes from the fertile soils of Karanjad, Nashik
+            {t('heroTagline')}
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6">
@@ -57,7 +71,7 @@ export default function Hero() {
               onClick={scrollToForm}
               className="rounded-full bg-purple-700 px-8 py-4 text-base font-bold text-white shadow-xl transition-all duration-200 hover:bg-purple-800 hover:shadow-purple-700/30 hover:scale-105 active:scale-95"
             >
-              Plan Your Visit
+              {t('navPlanVisit')}
             </a>
             <a
               href="#about"
@@ -73,11 +87,12 @@ export default function Hero() {
               }}
               className="rounded-full border border-white/40 bg-white/10 px-8 py-4 text-base font-bold text-white backdrop-blur-md transition-all duration-200 hover:bg-white/20 hover:scale-105 active:scale-95"
             >
-              Explore Farm
+              {t('heroExplore')}
             </a>
           </div>
         </motion.div>
       </div>
+
 
       {/* Floating Chevron Down indicator */}
       <div className="absolute bottom-8 left-1/2 z-15 -translate-x-1/2">

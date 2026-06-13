@@ -10,6 +10,8 @@ import VisitRequestForm from './components/VisitRequestForm';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
 import LoadingSpinner from './components/LoadingSpinner';
+import { LanguageProvider } from './components/LanguageContext';
+import LanguageSelectorModal from './components/LanguageSelectorModal';
 
 function MainWebsite() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,14 +46,18 @@ function MainWebsite() {
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Main Website Route */}
-        <Route path="/" element={<MainWebsite />} />
-        
-        {/* Hidden Admin Dashboard Route */}
-        <Route path="/jk-admin" element={<AdminDashboard />} />
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <Routes>
+          {/* Main Website Route */}
+          <Route path="/" element={<MainWebsite />} />
+          
+          {/* Hidden Admin Dashboard Route */}
+          <Route path="/jk-admin" element={<AdminDashboard />} />
+        </Routes>
+      </Router>
+      <LanguageSelectorModal />
+    </LanguageProvider>
   );
 }
+

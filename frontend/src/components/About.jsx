@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Leaf, HeartHandshake, Phone } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,18 +24,18 @@ export default function About() {
   const highlights = [
     {
       icon: Leaf,
-      title: "Nature First",
-      desc: "Our vineyard operates on eco-friendly, nutrient-dense organic soils in Baglan Taluka."
+      title: t('aboutNatureFirst'),
+      desc: t('aboutNatureDesc')
     },
     {
       icon: ShieldCheck,
-      title: "Strict Quality Control",
-      desc: "Every cluster is handpicked and monitored for sugar concentration (Brix levels) and crispness."
+      title: t('aboutStrictQuality'),
+      desc: t('aboutStrictDesc')
     },
     {
       icon: HeartHandshake,
-      title: "Owner Operated",
-      desc: "Direct involvement of Mahendra and Jitendra Deore at every step of cultivation."
+      title: t('aboutOwnerOperated'),
+      desc: t('aboutOwnerDesc')
     }
   ];
 
@@ -56,34 +59,28 @@ export default function About() {
               variants={itemVariants}
               className="text-xs font-bold uppercase tracking-widest text-purple-700"
             >
-              Our Heritage & Passion
+              {t('aboutHeritage')}
             </motion.span>
             
             <motion.h2
               variants={itemVariants}
               className="mt-3 font-serif text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl"
             >
-              Nurturing Premium Grapes in Nashik
+              {t('aboutHeading')}
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-lg leading-relaxed text-stone-600"
+              className="mt-6 text-lg leading-relaxed text-stone-600 font-light"
             >
-              Nestled in the famous agricultural hub of Karanjad in Nashik, Maharashtra,
-              <strong> J.K. Farm</strong> is an estate of agricultural mastery. Spanning rich
-              volcanic soils under temperate microclimates, our vineyard is dedicated to growing
-              the absolute finest quality dessert grapes.
+              {t('aboutDesc1')}
             </motion.p>
 
             <motion.p
               variants={itemVariants}
-              className="mt-4 text-base leading-relaxed text-stone-500"
+              className="mt-4 text-base leading-relaxed text-stone-500 font-light"
             >
-              Owned and personally managed by the Deore brothers, <strong>Mahendra Deore</strong> and
-              <strong> Jitendra Deore</strong>, J.K. Farm represents generations of soil knowledge combined with
-              modern viticulture practices. We focus heavily on cultivating two exquisite varieties:
-              the deep crimson seedless grape and our signature sweet J.K Sugar grape.
+              {t('aboutDesc2')}
             </motion.p>
 
             {/* Owner contact highlight */}
@@ -92,8 +89,8 @@ export default function About() {
               className="mt-6 flex flex-col rounded-2xl bg-purple-50 p-6 border border-purple-100 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <h4 className="font-serif text-lg font-bold text-purple-900">Have any questions?</h4>
-                <p className="text-sm text-purple-700">Contact owners Mahendra & Jitendra Deore directly</p>
+                <h4 className="font-serif text-lg font-bold text-purple-900">{t('aboutQuestions')}</h4>
+                <p className="text-sm text-purple-700">{t('aboutContactOwner')}</p>
               </div>
               <a
                 href="tel:+919420828901"
@@ -124,6 +121,7 @@ export default function About() {
               })}
             </div>
           </div>
+
 
           {/* Right Column: Visual Photo collage */}
           <div className="relative lg:col-span-5">

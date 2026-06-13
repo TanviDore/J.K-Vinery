@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Grape } from 'lucide-react';
+import { Menu, X, Grape, Globe } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t, language, setShowModal } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +20,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Farm', href: '#about' },
-    { name: 'Varieties', href: '#varieties' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Location', href: '#location' },
+    { name: t('navHome'), href: '#home' },
+    { name: t('navAbout'), href: '#about' },
+    { name: t('navVarieties'), href: '#varieties' },
+    { name: t('navExperience'), href: '#experience' },
+    { name: t('navLocation'), href: '#location' },
   ];
 
   const handleLinkClick = (e, href) => {
@@ -74,12 +76,23 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
+            
+            {/* Language Selector Button */}
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center space-x-1.5 rounded-full border border-stone-200 bg-white/50 px-3.5 py-1.5 text-xs font-bold text-stone-700 hover:text-purple-700 hover:border-purple-300 hover:bg-white shadow-sm transition-all duration-200 active:scale-95"
+              title="Change Language"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span className="uppercase tracking-wider">{language}</span>
+            </button>
+
             <a
               href="#visit-form"
               onClick={(e) => handleLinkClick(e, '#visit-form')}
               className="rounded-full bg-purple-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-purple-800 hover:shadow-lg hover:shadow-purple-700/20 active:scale-95"
             >
-              Plan Your Visit
+              {t('navPlanVisit')}
             </a>
           </div>
 
@@ -121,15 +134,31 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+
+          {/* Mobile Language Selector Button */}
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              setShowModal(true);
+            }}
+            className="flex items-center justify-center space-x-2 rounded-full border border-stone-200 py-2.5 text-base font-semibold text-stone-700 hover:text-purple-700 hover:border-purple-300 transition-all active:scale-95"
+          >
+            <Globe className="h-5 w-5" />
+            <span className="uppercase">
+              {language === 'mr' ? 'भाषा (मराठी)' : language === 'hi' ? 'भाषा (हिंदी)' : 'Language (EN)'}
+            </span>
+          </button>
+
           <a
             href="#visit-form"
             onClick={(e) => handleLinkClick(e, '#visit-form')}
             className="mt-4 block rounded-full bg-purple-700 py-3 text-center text-base font-semibold text-white shadow-md transition-all hover:bg-purple-800"
           >
-            Plan Your Visit
+            {t('navPlanVisit')}
           </a>
         </div>
       </div>
     </nav>
   );
 }
+
