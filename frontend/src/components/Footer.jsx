@@ -1,7 +1,10 @@
 import React from 'react';
 import { Grape, Heart, Phone, MapPin, Mail } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   const handleLogoClick = (e) => {
     e.preventDefault();
     window.scrollTo({
@@ -26,48 +29,48 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-sm font-light text-stone-400 leading-relaxed">
-              Cultivating the finest premium Crimson & J.K Sugar grapes in Nashik. Our dedication to soil nutrition and harvesting methods guarantees unmatched taste and crispness.
+              {t('footerDesc')}
             </p>
           </div>
 
           {/* Owners Column */}
           <div>
-            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">Our Founders</h4>
+            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">{t('footerFounders')}</h4>
             <ul className="mt-4 space-y-3 text-sm text-stone-400 font-medium">
               <li>Mahendra Deore</li>
               <li>Jitendra Deore</li>
               <li className="mt-4 border-t border-stone-800 pt-3 text-xs font-normal text-stone-500 uppercase tracking-widest">
-                Nashik Agriculture Excellence
+                {t('footerSubText')}
               </li>
             </ul>
           </div>
 
           {/* Quick Links Column */}
           <div>
-            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">Quick Navigation</h4>
+            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">{t('footerQuickLinks')}</h4>
             <ul className="mt-4 space-y-2.5 text-sm font-semibold">
               <li>
-                <a href="#about" className="hover:text-purple-400 transition-colors">About Farm</a>
+                <a href="#about" className="hover:text-purple-400 transition-colors">{t('navAbout')}</a>
               </li>
               <li>
-                <a href="#varieties" className="hover:text-purple-400 transition-colors">Specialties</a>
+                <a href="#varieties" className="hover:text-purple-400 transition-colors">{t('navVarieties')}</a>
               </li>
               <li>
-                <a href="#experience" className="hover:text-purple-400 transition-colors">Experience Gallery</a>
+                <a href="#experience" className="hover:text-purple-400 transition-colors">{t('navExperience')}</a>
               </li>
               <li>
-                <a href="#location" className="hover:text-purple-400 transition-colors">Find Location</a>
+                <a href="#location" className="hover:text-purple-400 transition-colors">{t('navLocation')}</a>
               </li>
             </ul>
           </div>
 
           {/* Contact Details Column */}
           <div className="space-y-4">
-            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">Contact Details</h4>
+            <h4 className="font-serif text-lg font-semibold text-white tracking-wide">{t('footerContact')}</h4>
             <ul className="space-y-3.5 text-sm text-stone-400">
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 shrink-0 text-purple-400 mt-0.5" />
-                <span>At Post Karanjad, Taluka Baglan, District Nashik, Maharashtra, India</span>
+                <span>{t('locAddressLine1')} {t('locAddressLine2')} {t('locAddressLine3')}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 shrink-0 text-purple-400" />
@@ -90,11 +93,11 @@ export default function Footer() {
       {/* Bottom Footer: Copyright */}
       <div className="border-t border-stone-800 bg-stone-950 py-6 text-center text-xs text-stone-500 font-medium">
         <div className="mx-auto max-w-7xl px-4 flex flex-col space-y-2 sm:flex-row sm:justify-between sm:space-y-0 sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} J.K. Farm. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} J.K. Farm. {t('footerAllRights')}</p>
           <p className="flex items-center justify-center space-x-1">
-            <span>Made with</span>
+            <span>{t('footerMadeWith')}</span>
             <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" />
-            <span>in India</span>
+            <span>{t('footerInIndia')}</span>
           </p>
         </div>
       </div>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Navigation, Copy, Check } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function Location() {
+  const { t } = useLanguage();
   const [copied, setCopied] = React.useState(false);
 
-  const fullAddress = "At Post Karanjad, Taluka Baglan, District Nashik, Maharashtra, India";
+  const fullAddress = `${t('locAddressLine1')} ${t('locAddressLine2')} ${t('locAddressLine3')}`;
 
   const copyAddress = () => {
     navigator.clipboard.writeText(fullAddress);
@@ -21,16 +23,15 @@ export default function Location() {
           {/* Left Column: Address Details */}
           <div className="flex flex-col justify-center lg:col-span-5">
             <span className="text-xs font-bold uppercase tracking-widest text-purple-700">
-              Where to Find Us
+              {t('locFindUs')}
             </span>
             
             <h2 className="mt-3 font-serif text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl">
-              Visit J.K. Farm
+              {t('locVisitHeading')}
             </h2>
             
             <p className="mt-6 text-stone-600 leading-relaxed">
-              We are situated in the fertile and picturesque agricultural belt of Nashik district, 
-              well-known as the wine and grape capital of India. Visitors are welcome to schedule guided walks.
+              {t('locDesc')}
             </p>
 
             {/* Information Cards */}
@@ -42,11 +43,11 @@ export default function Location() {
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-serif text-lg font-bold text-stone-900">Farm Location</h4>
+                  <h4 className="font-serif text-lg font-bold text-stone-900">{t('locFarmTitle')}</h4>
                   <p className="mt-1.5 text-sm leading-relaxed text-stone-600 font-medium">
-                    At Post Karanjad,<br />
-                    Taluka Baglan, District Nashik,<br />
-                    Maharashtra, India
+                    {t('locAddressLine1')}<br />
+                    {t('locAddressLine2')}<br />
+                    {t('locAddressLine3')}
                   </p>
                   
                   {/* Actions */}
@@ -58,12 +59,12 @@ export default function Location() {
                       {copied ? (
                         <>
                           <Check className="h-3.5 w-3.5 text-green-600" />
-                          <span className="text-green-600 font-bold">Copied!</span>
+                          <span className="text-green-600 font-bold">{t('locCopiedBtn')}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="h-3.5 w-3.5" />
-                          <span>Copy Address</span>
+                          <span>{t('locCopyBtn')}</span>
                         </>
                       )}
                     </button>
@@ -74,7 +75,7 @@ export default function Location() {
                       className="flex items-center space-x-1.5 rounded-lg bg-purple-700 px-3 py-1.5 text-xs font-bold text-white shadow-sm transition-colors hover:bg-purple-800"
                     >
                       <Navigation className="h-3.5 w-3.5" />
-                      <span>Get Directions</span>
+                      <span>{t('locDirectionsBtn')}</span>
                     </a>
                   </div>
                 </div>
@@ -87,7 +88,7 @@ export default function Location() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <h5 className="text-xs uppercase tracking-wider text-stone-500 font-bold">Call Us</h5>
+                    <h5 className="text-xs uppercase tracking-wider text-stone-500 font-bold">{t('locCallUs')}</h5>
                     <a href="tel:+919420828901" className="text-sm font-bold text-stone-800 hover:text-purple-700">
                       +91 9420828901
                     </a>
@@ -99,7 +100,7 @@ export default function Location() {
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <h5 className="text-xs uppercase tracking-wider text-stone-500 font-bold">Email</h5>
+                    <h5 className="text-xs uppercase tracking-wider text-stone-500 font-bold">{t('locEmail')}</h5>
                     <a href="mailto:info@jkfarm.in" className="text-sm font-bold text-stone-800 hover:text-purple-700">
                       info@jkfarm.in
                     </a>
@@ -120,7 +121,7 @@ export default function Location() {
               className="relative h-96 w-full overflow-hidden rounded-3xl bg-stone-200 shadow-lg border border-stone-200 md:h-[450px]"
             >
               <iframe
-                title="Google Maps - J.K. Farm Location in Karanjad, Nashik"
+                title={t('locMapTitle')}
                 src="https://maps.google.com/maps?q=Karanjad,%20Baglan,%20Nashik,%20Maharashtra,%20India&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"

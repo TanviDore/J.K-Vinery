@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Calendar, User, Phone, Mail, MapPin, ClipboardList, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function VisitRequestForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     contactNumber: '',
@@ -29,25 +31,25 @@ export default function VisitRequestForm() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Full name is required';
+    if (!formData.name.trim()) newErrors.name = t('formErrName');
     if (!formData.contactNumber.trim()) {
-      newErrors.contactNumber = 'Contact number is required';
+      newErrors.contactNumber = t('formErrPhoneReq');
     } else if (!/^\+?[0-9]{10,12}$/.test(formData.contactNumber.replace(/[\s-]/g, ''))) {
-      newErrors.contactNumber = 'Please enter a valid 10-digit phone number';
+      newErrors.contactNumber = t('formErrPhoneVal');
     }
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('formErrEmailVal');
     }
-    if (!formData.address.trim()) newErrors.address = 'Your address is required';
-    if (!formData.purposeOfVisit.trim()) newErrors.purposeOfVisit = 'Purpose of visit is required';
+    if (!formData.address.trim()) newErrors.address = t('formErrAddress');
+    if (!formData.purposeOfVisit.trim()) newErrors.purposeOfVisit = t('formErrPurpose');
     if (!formData.preferredVisitDate) {
-      newErrors.preferredVisitDate = 'Please select a preferred visit date';
+      newErrors.preferredVisitDate = t('formErrDateReq');
     } else {
       const selectedDate = new Date(formData.preferredVisitDate);
       const today = new Date();
       today.setHours(0,0,0,0);
       if (selectedDate < today) {
-        newErrors.preferredVisitDate = 'Visit date cannot be in the past';
+        newErrors.preferredVisitDate = t('formErrDatePast');
       }
     }
 
@@ -76,7 +78,7 @@ export default function VisitRequestForm() {
         setStatus({
           loading: false,
           success: true,
-          message: 'Your farm visit request has been successfully submitted! We will contact you soon.'
+          message: t('formSuccessMsg')
         });
         setFormData({
           name: '',
@@ -94,7 +96,7 @@ export default function VisitRequestForm() {
       setStatus({
         loading: false,
         success: false,
-        message: err.message || 'Failed to connect to the backend server. Please make sure the server is running.'
+        message: err.message || t('formErrorMsg')
       });
     }
   };
@@ -106,13 +108,13 @@ export default function VisitRequestForm() {
         {/* Section Header */}
         <div className="text-center">
           <span className="text-xs font-bold uppercase tracking-widest text-purple-700">
-            Visit J.K. Farm
+            {t('formSubTitle')}
           </span>
           <h2 className="mt-3 font-serif text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl">
-            Request a Farm Visit
+            {t('formTitle')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-stone-600">
-            Experience the vineyard beauty, smell the sweet aroma of grapevines, and meet the owners. Plan your custom visit today.
+            {t('formDesc')}
           </p>
         </div>
 
@@ -123,7 +125,7 @@ export default function VisitRequestForm() {
             <div className="mb-8 flex items-start space-x-3 rounded-2xl bg-green-50 p-6 border border-green-200 text-green-800">
               <CheckCircle2 className="h-6 w-6 shrink-0 text-green-600" />
               <div>
-                <h4 className="font-bold text-lg">Thank You!</h4>
+                <h4 className="font-bold text-lg">{t('formSuccessTitle')}</h4>
                 <p className="mt-1 text-sm">{status.message}</p>
               </div>
             </div>
@@ -133,7 +135,7 @@ export default function VisitRequestForm() {
             <div className="mb-8 flex items-start space-x-3 rounded-2xl bg-red-50 p-6 border border-red-200 text-red-800">
               <AlertCircle className="h-6 w-6 shrink-0 text-red-600" />
               <div>
-                <h4 className="font-bold text-lg">Submission Failed</h4>
+                <h4 className="font-bold text-lg">{t('formErrorTitle')}</h4>
                 <p className="mt-1 text-sm">{status.message}</p>
               </div>
             </div>
@@ -144,7 +146,7 @@ export default function VisitRequestForm() {
             {/* Full Name */}
             <div className="sm:col-span-2">
               <label htmlFor="name" className="block text-sm font-semibold text-stone-700">
-                Full Name <span className="text-red-500">*</span>
+                {t('formLabelName')} <span className="text-red-500">*</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -156,7 +158,7 @@ export default function VisitRequestForm() {
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="e.g. Ramesh Patil"
+                  placeholder={t('formPlaceholderName')}
                   className={`block w-full rounded-2xl border bg-stone-50 py-3.5 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 transition-all focus:bg-white focus:outline-none focus:ring-2 ${
                     errors.name
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
@@ -170,7 +172,7 @@ export default function VisitRequestForm() {
             {/* Contact Number */}
             <div>
               <label htmlFor="contactNumber" className="block text-sm font-semibold text-stone-700">
-                Contact Number <span className="text-red-500">*</span>
+                {t('formLabelPhone')} <span className="text-red-500">*</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -182,7 +184,7 @@ export default function VisitRequestForm() {
                   id="contactNumber"
                   value={formData.contactNumber}
                   onChange={handleChange}
-                  placeholder="e.g. 9876543210"
+                  placeholder={t('formPlaceholderPhone')}
                   className={`block w-full rounded-2xl border bg-stone-50 py-3.5 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 transition-all focus:bg-white focus:outline-none focus:ring-2 ${
                     errors.contactNumber
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
@@ -198,7 +200,7 @@ export default function VisitRequestForm() {
             {/* Email Address */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-stone-700">
-                Email Address <span className="text-stone-400 text-xs font-normal">(Optional)</span>
+                {t('formLabelEmail')} <span className="text-stone-400 text-xs font-normal">{t('formOptional')}</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -210,7 +212,7 @@ export default function VisitRequestForm() {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="e.g. user@example.com"
+                  placeholder={t('formPlaceholderEmail')}
                   className={`block w-full rounded-2xl border bg-stone-50 py-3.5 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 transition-all focus:bg-white focus:outline-none focus:ring-2 ${
                     errors.email
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
@@ -224,7 +226,7 @@ export default function VisitRequestForm() {
             {/* Address */}
             <div className="sm:col-span-2">
               <label htmlFor="address" className="block text-sm font-semibold text-stone-700">
-                Your Address <span className="text-red-500">*</span>
+                {t('formLabelAddress')} <span className="text-red-500">*</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -236,7 +238,7 @@ export default function VisitRequestForm() {
                   id="address"
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="e.g. Shivajinagar, Pune"
+                  placeholder={t('formPlaceholderAddress')}
                   className={`block w-full rounded-2xl border bg-stone-50 py-3.5 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 transition-all focus:bg-white focus:outline-none focus:ring-2 ${
                     errors.address
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
@@ -250,7 +252,7 @@ export default function VisitRequestForm() {
             {/* Purpose of Visit */}
             <div className="sm:col-span-2">
               <label htmlFor="purposeOfVisit" className="block text-sm font-semibold text-stone-700">
-                Purpose of Visit <span className="text-red-500">*</span>
+                {t('formLabelPurpose')} <span className="text-red-500">*</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -262,7 +264,7 @@ export default function VisitRequestForm() {
                   id="purposeOfVisit"
                   value={formData.purposeOfVisit}
                   onChange={handleChange}
-                  placeholder="e.g. Grape buying, farm tourism, photography, educational visit"
+                  placeholder={t('formPlaceholderPurpose')}
                   className={`block w-full rounded-2xl border bg-stone-50 py-3.5 pl-11 pr-4 text-sm text-stone-900 placeholder-stone-400 transition-all focus:bg-white focus:outline-none focus:ring-2 ${
                     errors.purposeOfVisit
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
@@ -278,7 +280,7 @@ export default function VisitRequestForm() {
             {/* Preferred Visit Date */}
             <div className="sm:col-span-2">
               <label htmlFor="preferredVisitDate" className="block text-sm font-semibold text-stone-700">
-                Preferred Visit Date <span className="text-red-500">*</span>
+                {t('formLabelDate')} <span className="text-red-500">*</span>
               </label>
               <div className="relative mt-2">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400">
@@ -312,10 +314,10 @@ export default function VisitRequestForm() {
                 {status.loading ? (
                   <>
                     <Loader2 className="h-5 w-5 animate-spin" />
-                    <span>Submitting Request...</span>
+                    <span>{t('formBtnSubmitting')}</span>
                   </>
                 ) : (
-                  <span>Submit Visit Request</span>
+                  <span>{t('formBtnSubmit')}</span>
                 )}
               </button>
             </div>

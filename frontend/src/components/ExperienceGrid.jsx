@@ -1,39 +1,41 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function ExperienceGrid() {
+  const { t } = useLanguage();
   const [activePhotoIndex, setActivePhotoIndex] = useState(null);
 
   const photos = [
     {
       src: "/images/farm6.jpg",
-      title: "Rustic Harvest",
-      caption: "Freshly harvested dark purple and green grapes nested in a woven basket.",
+      title: t('expPhoto1Title'),
+      caption: t('expPhoto1Caption'),
       sizeClass: "md:col-span-1 md:row-span-1"
     },
     {
       src: "/images/farm7.jpg",
-      title: "Vineyard Trails",
-      caption: "Serene paths running parallel to green trellises stretching towards Baglan's horizon.",
+      title: t('expPhoto2Title'),
+      caption: t('expPhoto2Caption'),
       sizeClass: "md:col-span-2 md:row-span-1"
     },
     {
       src: "/images/farm8.jpg",
-      title: "Quality Care & Sorting",
-      caption: "Careful grading and boxing process ensuring only flawless grapes ship to markets.",
+      title: t('expPhoto3Title'),
+      caption: t('expPhoto3Caption'),
       sizeClass: "md:col-span-1 md:row-span-2"
     },
     {
       src: "/images/farm9.jpg",
-      title: "Morning Glistening",
-      caption: "Glistening morning dew clinging to organic grape clusters under early dawn sunlight.",
+      title: t('expPhoto4Title'),
+      caption: t('expPhoto4Caption'),
       sizeClass: "md:col-span-1 md:row-span-1"
     },
     {
       src: "/images/farm10.jpg",
-      title: "Valley Agriculture",
-      caption: "Panoramic vistas across the Nashik grape cultivating valleys and farms.",
+      title: t('expPhoto5Title'),
+      caption: t('expPhoto5Caption'),
       sizeClass: "md:col-span-2 md:row-span-1"
     }
   ];
@@ -53,13 +55,13 @@ export default function ExperienceGrid() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="text-xs font-bold uppercase tracking-widest text-purple-700">
-            Life at the Vineyard
+            {t('expLife')}
           </span>
           <h2 className="mt-3 font-serif text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl">
-            The Farm Experience
+            {t('expHeading')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-stone-600">
-            A visual journey into our daily operations, harvest rituals, and the raw natural beauty that goes into every grape.
+            {t('expDesc')}
           </p>
         </div>
 
@@ -88,7 +90,7 @@ export default function ExperienceGrid() {
               {/* Text Info (Visible on hover) */}
               <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                 <span className="text-xs font-bold uppercase tracking-widest text-green-300 flex items-center gap-1.5">
-                  <ZoomIn className="h-3 w-3" /> Click to enlarge
+                  <ZoomIn className="h-3 w-3" /> {t('expEnlarge')}
                 </span>
                 <h3 className="mt-1 font-serif text-2xl font-bold text-white">
                   {photo.title}

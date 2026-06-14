@@ -1,37 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Flame, Star, Sparkles, Scale } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 export default function Varieties() {
+  const { t } = useLanguage();
+
   const grapeVarieties = [
     {
       id: "crimson",
-      name: "Crimson Grapes",
-      subtitle: "Vibrant, Sweet & Seedless",
+      name: t('varCrimsonName'),
+      subtitle: t('varCrimsonSubtitle'),
       image: "/images/farm2.jpg",
-      description: "Our Crimson Grapes are celebrated for their gorgeous bright red hue and crisp, firm texture. They offer a perfect sugar-to-acid ratio, resulting in a sweet and highly refreshing flavor profile that lingers delightfully.",
+      description: t('varCrimsonDesc'),
       themeColor: "from-purple-900/90 to-fuchsia-950/90",
       accentBadge: "bg-purple-100 text-purple-800 border-purple-200",
       features: [
-        { icon: Flame, text: "Vibrant deep crimson-red skin coloring" },
-        { icon: Star, text: "Extremely crisp texture with high snap" },
-        { icon: Sparkles, text: "Seedless dessert grape with extended shelf life" },
-        { icon: Scale, text: "Average sugar brix level: 18-20%" }
+        { icon: Flame, text: t('varCrimsonF1') },
+        { icon: Star, text: t('varCrimsonF2') },
+        { icon: Sparkles, text: t('varCrimsonF3') },
+        { icon: Scale, text: t('varCrimsonF4') }
       ]
     },
     {
       id: "jksugar",
-      name: "J.K Sugar Grapes",
-      subtitle: "Extra Sweet & Juicy Golden-Greens",
+      name: t('varSugarName'),
+      subtitle: t('varSugarSubtitle'),
       image: "/images/farm3.jpg",
-      description: "A specialty selection of our farm, the J.K Sugar Grape is cultivated to maximize its sugar concentration. With a thin, translucent pale green skin, these grapes are loaded with high water content and exceptional honeyed sweetness.",
+      description: t('varSugarDesc'),
       themeColor: "from-green-900/90 to-emerald-950/90",
       accentBadge: "bg-green-100 text-green-800 border-green-200",
       features: [
-        { icon: Flame, text: "Translucent green-gold premium appearance" },
-        { icon: Star, text: "Intense honey-like sweet juice profile" },
-        { icon: Sparkles, text: "Thin skin yielding an easy, crisp bite" },
-        { icon: Scale, text: "High sugar brix level exceeding 21%" }
+        { icon: Flame, text: t('varSugarF1') },
+        { icon: Star, text: t('varSugarF2') },
+        { icon: Sparkles, text: t('varSugarF3') },
+        { icon: Scale, text: t('varSugarF4') }
       ]
     }
   ];
@@ -41,13 +44,13 @@ export default function Varieties() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="text-xs font-bold uppercase tracking-widest text-purple-700">
-            Our Specialties
+            {t('varSpecialties')}
           </span>
           <h2 className="mt-3 font-serif text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl">
-            Premium Grape Varieties
+            {t('varHeading')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-stone-600">
-            Carefully cultivated to deliver rich flavor, crunch, and nutritional benefits to grape lovers.
+            {t('varDesc')}
           </p>
         </div>
 
@@ -90,7 +93,7 @@ export default function Varieties() {
                 </p>
 
                 <div className="mt-8">
-                  <h4 className="font-serif text-lg font-bold text-stone-900">Key Characteristics</h4>
+                  <h4 className="font-serif text-lg font-bold text-stone-900">{t('varCharacteristics')}</h4>
                   <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     {grape.features.map((feature, i) => {
                       const Icon = feature.icon;
