@@ -139,7 +139,7 @@ export default function About() {
               <div className="overflow-hidden rounded-2xl bg-stone-200 shadow-xl border border-white">
                 <img
                   src="/images/farm4.jpg"
-                  alt="Mahendra and Jitendra Deore inspecting grape harvests"
+                  alt="Mahendra Deore in the vineyard holding green grapes"
                   className="h-80 w-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -148,7 +148,7 @@ export default function About() {
               <div className="absolute -bottom-10 -right-6 w-1/2 overflow-hidden rounded-xl bg-stone-200 shadow-2xl border-4 border-white hidden sm:block">
                 <img
                   src="/images/farm5.jpg"
-                  alt="Sun rays through J.K. Farm vineyard canopy"
+                  alt="Jitendra Deore in the vineyard holding red grapes"
                   className="h-44 w-full object-cover"
                 />
               </div>
